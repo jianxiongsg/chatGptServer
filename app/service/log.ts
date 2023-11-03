@@ -1,9 +1,9 @@
-import { Service, PlainObject } from 'egg';
+import { Service } from 'egg';
 import { logger, getDatetime } from '../util/common';
 import { isNull, missingParameter, } from '../util/service_com';
 
 import clickhouse from '../util/database';
-
+type PlainObject<T = any> = { [key: string]: T };
 /**
  * log Service
  */
