@@ -27,7 +27,8 @@
         "app/module/*"
       ]
     },
-    "baseUrl": "."
+    "baseUrl": ".",
+    "outDir": "./dist"
   },
   "exclude": [
     "app/public",
