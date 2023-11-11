@@ -1,5 +1,5 @@
 import { Service } from 'egg';
-import { logger, getDatetime } from '../util/common';
+import { getDatetime } from '../util/common';
 import { isNull, missingParameter, } from '../util/service_com';
 
 import clickhouse from '../util/database';
@@ -18,7 +18,7 @@ export default class Log extends Service {
             await clickhouse.query(`INSERT INTO ${tbName} VALUES (${data});`).toPromise();
             return true
         } catch (error) {
-            logger(error);
+
             return false
         }
     }

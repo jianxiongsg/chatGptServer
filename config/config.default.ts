@@ -8,11 +8,18 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + '_886';
 
   // add your egg config in here
-  config.middleware = [];
+  config.middleware = ['check', 'errorHandler'];
   config.OPENAI_API_KEY = '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'
   // add your special config in here
   const bizConfig = {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
+    session: {
+      key: 'openai_session',
+      maxAge: 24 * 3600 * 1000, // 最大有效时间，单位为毫秒
+    },
+    errorHandler: {
+      defaultError: 'Internal Server Error'
+    }
   };
   // egg端口号
   config.cluster = {

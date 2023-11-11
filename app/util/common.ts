@@ -1,7 +1,4 @@
 import clickhouse from './database'
-export const logger = (...args: any[]) => {
-    console.log.apply(null, ["data-server", new Date(), ...args]);
-}
 
 
 

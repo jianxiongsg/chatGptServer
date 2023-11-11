@@ -1,5 +1,4 @@
 import { Application } from 'egg';
-import { logger } from './util/common';
 
 export default (app: Application) => {
   const { controller, router } = app;
@@ -7,9 +6,9 @@ export default (app: Application) => {
     const start = Date.now();
     await next();
     const ms = Date.now() - start;
-    logger(`${ctx.method && ctx.method} ${ctx.url && ctx.url} - ${ms}ms`);
+    ctx.logger.debug(`${ctx.method && ctx.method} ${ctx.url && ctx.url} - ${ms}ms`);
   })
-  router.get('/', controller.home.index);
+  router.get('/test', controller.home.index);
   // router.get('/log/userLogin', controller.log.login);
   // router.get('/log/userLogout', controller.log.logout);
   // router.get('/log/stageStart', controller.log.stageStart);

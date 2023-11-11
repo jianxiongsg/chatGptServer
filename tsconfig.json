@@ -12,7 +12,7 @@
     "allowJs": false,
     "pretty": true,
     "noEmitOnError": false,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -28,11 +28,12 @@
       ]
     },
     "baseUrl": ".",
-    "outDir": "./dist"
+    "outDir": "dist"
   },
   "exclude": [
     "app/public",
     "app/views",
+    "test",
     "node_modules*"
   ]
 }
