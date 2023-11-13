@@ -28,6 +28,7 @@ export default class FooBoot implements IBoot {
     async willReady() {
         // All plugins have started, can do some thing before app ready.
         this.app.logger.info('所有插件都已经启动，可以在应用程序准备好之前做一些事情');
+
     }
 
     async didReady() {

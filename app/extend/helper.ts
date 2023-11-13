@@ -1,9 +1,8 @@
 
 const helper = {
-    test() {
-
-        return 'test';
+    uint8ArrayToUtf8(uint8Array) {
+        const decoder = new TextDecoder('utf-8');
+        return decoder.decode(uint8Array, { stream: true });
     }
 }
-export type Helper = typeof helper;
 export default helper;

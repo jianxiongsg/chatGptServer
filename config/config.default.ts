@@ -9,10 +9,19 @@ export default (appInfo: EggAppInfo) => {
 
   // add your egg config in here
   config.middleware = ['check', 'errorHandler'];
-  config.OPENAI_API_KEY = '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'
+  config.openAi = {
+    apiKey: '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',
+    proxy: 'http://127.0.0.1:7890',
+    defaultOpenAIRequestOptions: {
+      temperature: 0.8,
+      top_p: 1,
+      max_tokens: 2000,
+      presence_penalty: 0,
+      frequency_penalty: 0,
+    }
+  }
   // add your special config in here
   const bizConfig = {
-    sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
     session: {
       key: 'openai_session',
       maxAge: 24 * 3600 * 1000, // 最大有效时间，单位为毫秒

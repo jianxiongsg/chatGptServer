@@ -1,6 +1,6 @@
 import { Context, Application, EggAppConfig } from 'egg';
 
-export default (options: EggAppConfig['errorHandler'], app: Application) => {
+export default (options: EggAppConfig['errorHandler']) => {
     return async function errorHandler(ctx: Context, next: () => Promise<any>) {
         try {
             await next();
