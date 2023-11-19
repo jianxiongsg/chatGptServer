@@ -3,6 +3,7 @@ import { Context, Application, EggAppConfig } from 'egg';
 export default (options: EggAppConfig['errorHandler']) => {
     return async function errorHandler(ctx: Context, next: () => Promise<any>) {
         try {
+            console.log('errorHandler')
             await next();
         } catch (err: any) {
             // 所有的异常都在 app 上触发一个 error 事件，框架会记录一条错误日志

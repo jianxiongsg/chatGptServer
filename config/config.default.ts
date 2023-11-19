@@ -8,7 +8,7 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + '_886';
 
   // add your egg config in here
-  config.middleware = ['check', 'errorHandler'];
+  // config.middleware = ['check', 'errorHandler'];
   config.openAi = {
     apiKey: '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',
     proxy: 'http://127.0.0.1:7890',
@@ -37,6 +37,17 @@ export default (appInfo: EggAppInfo) => {
       port: 3000,
       hostname: '127.0.0.1',
     }
+  };
+  // TODO初步解决跨域问题，后面要单独处理
+  config.cors = {
+    origin: '*', // 设置允许跨域的源，可以设置为具体的域名或 '*'（表示允许所有源）
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH', // 设置允许的 HTTP 方法
+  };
+  config.security = {
+    csrf: {
+      enable: false, // 禁用 CSRF
+    },
+    domainWhiteList: [], // 将需要跨域的域名添加到白名单中
   };
   // the return config will combines to EggAppConfig
   return {

@@ -10,6 +10,10 @@ const plugin: EggPlugin = {
   //   enable: false,
   //   package: 'egg-validate',
   // }
+  cors: {
+    enable: true,
+    package: 'egg-cors',
+  },
 };
 
 export default plugin;
