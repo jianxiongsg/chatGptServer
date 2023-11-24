@@ -59,45 +59,70 @@ export default class OpenAiController extends Controller {
     }
     public async createChatCompletionPost() {
         const { ctx } = this;
-        ctx.logger.debug('ctx', ctx.request.body);
-        // 设置响应头
-        ctx.res.writeHead(200, {
-            "Content-Type": "text/event-stream",
-            "Cache-Control": "no-cache",
-            "Connection": "keep-alive",
-            "Access-Control-Allow-Origin": '*',
-        })
         // ctx.set('Content-Type', 'text/event-stream'); // 返回utf-8的数据，避免出现乱码
-        // ctx.set('Cache-Control', 'no-cache'); // 禁止前端缓存响应，保证前端获得实时最新的数据
-        // ctx.set('Connection', 'keep-alive'); // 保持服务端和前端连接
-        // ctx.set('X-Accel-Buffering', 'no'); // // 关闭 Nginx 的缓冲
+        ctx.set('Cache-Control', 'no-cache'); // 禁止前端缓存响应，保证前端获得实时最新的数据
+        ctx.set('Connection', 'keep-alive'); // 保持服务端和前端连接
+        ctx.set('X-Accel-Buffering', 'no'); // // 关闭 Nginx 的缓冲
+        ctx.set("Access-Control-Max-Age", "3600");
+        ctx.set("Cf-Cache-Status", "DYNAMIC");
+        ctx.set('Transfer-Encoding', 'chunked');
+        ctx.remove('www-authenticate')
 
         // 设置允许跨域的域名，可以使用通配符 "*" 表示允许所有域名
         ctx.set('Access-Control-Allow-Origin', '*');
         // 设置允许的请求方法
         ctx.set('Access-Control-Allow-Methods', 'GET,HEAD,PUT,POST,DELETE,PATCH');
         // 设置允许的请求头
-        ctx.set('Access-Control-Allow-Headers', 'access-control-allow-credentials,Content-Type, Authorization, x-requested-with');
+        ctx.set('Access-Control-Allow-Headers', '*');
+        // ctx.set('Access-Control-Allow-Headers', 'access-control-allow-credentials,Access-Control-Max-Age,Content-Type,Connection,Cache-Control, Authorization, x-requested-with,X-Accel-Buffering');
         // 设置是否允许发送Cookie
         ctx.set('Access-Control-Allow-Credentials', 'true');
-        const stream = new PassThrough();
-        const encoder = new TextEncoder();
-        // const uint8Array = encoder.encode(JSON.stringify({ aa: 1 }));
-        // if (content) ctx.res.write(content);
-        // ctx.res.write(uint8Array);
-        ctx.body = stream;
-        for (let i = 0; i < 10; i++) {
-            await new Promise((resolve) => setTimeout(resolve, 1000)); // 模拟每秒生成一次数据
-            console.log('.......>>', i, Date.now());
-            ctx.res.write(encoder.encode(JSON.stringify({ aa: i })));
-        }
-        // stream.end();
-        ctx.res.end();
-        ctx.status = 200;
+        ctx.set('Content-Type', 'text/plain; charset=utf-8');
+        ctx.set('Transfer-Encoding', 'chunked');
+        // 立即刷新响应头
+        ctx.type = 'text/event-stream'; // 设置响应类型为 Server-Sent Events
+        // ctx.flushHeaders(); // 发送响应头
 
+        // const encoder = new TextEncoder();
+        // ctx.body = stream;
+        ctx.status = 200;
+        ctx.res.flushHeaders(); // 立即发送响应头
+        // ctx.type = 'text/plain';
+        const stream = new PassThrough();
+        ctx.body = stream;
+        console.log('...........start')
+        let i = 1;
+        let END_COUNT = 20
+        let timer = setInterval(() => {
+            i++;
+            console.log(i)
+            stream.write(`data:${i}\n\n`);
+
+            // 刷新响应，立即发送数据块给客户端
+            if (i === END_COUNT) {
+                console.log(`${i}`)
+                stream.write(`data:你好${i}\n\n`);
+                stream.end();
+                ctx.res.end();
+                clearInterval(timer)
+            }
+        }, 300)
+        return;
+        // console.log('..........ctx.request.body', ctx.request.body)
         // const messages: any[] = ctx.request.body.messages.slice(-1);
         // // messages.push({ "role": 'user', "content": ctx.request.body.messages[] });
         // const completion = await ctx.service.openAiServer.createChatCompletion("gpt-3.5-turbo", messages);
+        // console.log('completion', completion);
+        // console.log('header', ctx.headers);
+        // ctx.body = completion.toReadableStream().getReader();
+        // ctx.status = 200;
+
+
+        // return new Response(completion, {
+        //     status: 200,
+        //     statusText: 'statusText',
+        //     // headers: newHeaders,
+        // });
         // const reader = completion.toReadableStream().getReader();
         // const stream = new PassThrough();
         // let done = false;
@@ -161,6 +186,5 @@ export default class OpenAiController extends Controller {
         // let result = { "role": resultname, "content": resultstring };
         ctx.body = response;
     }
-
 
 }
