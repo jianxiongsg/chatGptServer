@@ -87,25 +87,26 @@ export default class OpenAiController extends Controller {
         // ctx.body = stream;
         ctx.status = 200;
         ctx.res.flushHeaders(); // 立即发送响应头
-        // ctx.type = 'text/plain';
+        ctx.type = 'text/plain';
         const stream = new PassThrough();
         ctx.body = stream;
         console.log('...........start')
         let i = 1;
         let END_COUNT = 20
         let timer = setInterval(() => {
-            i++;
             console.log(i)
-            stream.write(`data:${i}\n\n`);
+            stream.write(`data:${JSON.stringify({ msg: i })}\n\n`);
 
             // 刷新响应，立即发送数据块给客户端
             if (i === END_COUNT) {
                 console.log(`${i}`)
-                stream.write(`data:你好${i}\n\n`);
+                stream.write(`data:${JSON.stringify({ msg: '结束' })}\n\n`);
                 stream.end();
                 ctx.res.end();
                 clearInterval(timer)
             }
+
+            i++;
         }, 300)
         return;
         // console.log('..........ctx.request.body', ctx.request.body)
