@@ -1,4 +1,4 @@
-import clickhouse from './database'
+import clickhouse from '../service/database/database'
 
 
 
