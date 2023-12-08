@@ -1,4 +1,6 @@
 import { Application } from 'egg';
+import { User } from './database/entities/User';
+// import 'reflect-metadata';
 
 export default (app: Application) => {
   const { controller, router } = app;

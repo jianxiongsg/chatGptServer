@@ -1,5 +1,8 @@
 
+import { DBClient } from 'app/database/dbClient';
+import { User } from 'app/database/entities/User';
 import { Application, IBoot } from 'egg';
+import { DataSource } from "typeorm";
 
 export default class FooBoot implements IBoot {
     private readonly app: Application;
@@ -22,12 +25,30 @@ export default class FooBoot implements IBoot {
 
     async didLoad() {
         // All files have loaded, start plugin here.
-        this.app.logger.info('所有文件都已加载，请在此处启动插件');
+        this.app.logger.info('启动插件...');
+        const config = this.app.config.typeorm;
+        config.entities = [User];
+        // 创建数据源
+        const dataSource = DBClient.createDataSource(config);
+        try {
+            await dataSource.initialize();
+            this.app.logger.info('数据库连接成功');
+        } catch (err) {
+            this.app.logger.error('数据库连接失败', err);
+        }
+
+        // 将数据源挂载到 app 上，供后续使用
+        this.app.dataSource = dataSource;
+
+
+        const users = await this.app.dataSource.manager.find(User)
+        console.log("Loaded users: ", users)
+
     }
 
     async willReady() {
         // All plugins have started, can do some thing before app ready.
-        this.app.logger.info('所有插件都已经启动，可以在应用程序准备好之前做一些事情');
+        this.app.logger.info('所有插件都已经启动');
 
     }
 

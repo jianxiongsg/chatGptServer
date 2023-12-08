@@ -8,6 +8,7 @@ export default class HomeController extends Controller {
   public async index() {
     const { ctx } = this;
     ctx.logger.debug('ctx', ctx.query);
+
     const messages: any[] = [];
     const apiKey = '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'
     const openai = new OpenAI({

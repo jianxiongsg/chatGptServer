@@ -22,6 +22,10 @@
     "skipDefaultLibCheck": true,
     "inlineSourceMap": true,
     "importHelpers": true,
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "paths": {
       "@/module/*": [
         "app/module/*"

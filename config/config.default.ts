@@ -49,6 +49,19 @@ export default (appInfo: EggAppInfo) => {
     },
     domainWhiteList: [], // 将需要跨域的域名添加到白名单中
   };
+  config.typeorm = {
+    type: "postgres",
+    host: "127.0.0.1",
+    port: 5432,
+    username: "postgres",
+    password: "123456",
+    database: "study",
+    synchronize: true,
+    logging: false,
+    entities: [],
+    migrations: [],
+    subscribers: [],
+  }
   // the return config will combines to EggAppConfig
   return {
     ...config,
