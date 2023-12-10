@@ -62,6 +62,16 @@ export default (appInfo: EggAppInfo) => {
     migrations: [],
     subscribers: [],
   }
+  config.cache = {
+    default: 'memory', // 默认缓存类型为内存
+    stores: {
+      memory: {
+        driver: 'memory', // 内存缓存类型
+        max: 100, // 缓存最大数量
+        ttl: 0, // 缓存默认过期时间，0 表示永不过期
+      }
+    }
+  }
   // the return config will combines to EggAppConfig
   return {
     ...config,

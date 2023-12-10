@@ -14,6 +14,10 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-cors',
   },
+  cache: {
+    enable: true,
+    package: 'egg-cache',
+  }
 };
 
 export default plugin;

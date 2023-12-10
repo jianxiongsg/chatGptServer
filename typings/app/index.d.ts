@@ -10,6 +10,7 @@ export as namespace Egg;
 declare module 'egg' {
     interface Application {
         dataSource: DataSource;
+        cache: Cache;
     }
 
 }

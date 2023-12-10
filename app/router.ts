@@ -9,6 +9,8 @@ export default (app: Application) => {
     await next();
     const ms = Date.now() - start;
     ctx.logger.debug(`${ctx.method && ctx.method} ${ctx.url && ctx.url} - ${ms}ms`);
+
+
   })
   router.get('/models', controller.openAi.listModels);
   router.get('/model', controller.openAi.getModel);

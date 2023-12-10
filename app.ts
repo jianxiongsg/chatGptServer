@@ -27,7 +27,6 @@ export default class FooBoot implements IBoot {
         // All files have loaded, start plugin here.
         this.app.logger.info('启动插件...');
         const config = this.app.config.typeorm;
-        config.entities = [User];
         // 创建数据源
         const dataSource = DBClient.createDataSource(config);
         try {
@@ -43,6 +42,7 @@ export default class FooBoot implements IBoot {
 
         const users = await this.app.dataSource.manager.find(User)
         console.log("Loaded users: ", users)
+
 
     }
 
