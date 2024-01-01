@@ -20,6 +20,7 @@
     "clean": "tsc -b --clean"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "egg": "^3.15.0",
     "egg-cache": "^0.0.7",
     "egg-cors": "^2.2.3",

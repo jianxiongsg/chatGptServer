@@ -3,9 +3,10 @@ import { Context, Application, EggAppConfig } from 'egg';
 export default (options: EggAppConfig['errorHandler']) => {
     return async function errorHandler(ctx: Context, next: () => Promise<any>) {
         try {
-            console.log('errorHandler')
+            console.log('errorHandler', options)
             await next();
         } catch (err: any) {
+            ctx.logger.error(err);
             // 所有的异常都在 app 上触发一个 error 事件，框架会记录一条错误日志
             ctx.app.emit('error', err, ctx);
 
@@ -13,7 +14,7 @@ export default (options: EggAppConfig['errorHandler']) => {
             // 生产环境时 500 错误的详细错误内容不返回给客户端，因为可能包含敏感信息
             const error =
                 status === 500 && ctx.app.config.env === 'prod'
-                    ? options.defaultError
+                    ? 'Internal Server Error'
                     : err.message;
 
             // 从 error 对象上读出各个属性，设置到响应中

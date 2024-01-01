@@ -8,7 +8,7 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + '_886';
 
   // add your egg config in here
-  // config.middleware = ['check', 'errorHandler'];
+  config.middleware = ['check', 'errorHandler'];
   config.openAi = {
     apiKey: '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',
     proxy: 'http://127.0.0.1:7890',
