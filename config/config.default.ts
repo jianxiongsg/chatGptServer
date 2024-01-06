@@ -5,10 +5,10 @@ export default (appInfo: EggAppInfo) => {
 
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_886';
+  config.keys = appInfo.name + 'chat_gpt_550';
 
   // add your egg config in here
-  config.middleware = ['check', 'errorHandler'];
+  config.middleware = ['errorHandler'];
   config.openAi = {
     apiKey: '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',
     proxy: 'http://127.0.0.1:7890',
@@ -25,9 +25,9 @@ export default (appInfo: EggAppInfo) => {
     session: {
       key: 'openai_session',
       maxAge: 24 * 3600 * 1000, // 最大有效时间，单位为毫秒
-    },
-    errorHandler: {
-      defaultError: 'Internal Server Error'
+      // httpOnly: true,
+      // encrypt: true, // 加密
+      renew: true, // 每次访问页面都会给 session 延长时间
     }
   };
   // egg端口号
@@ -40,8 +40,9 @@ export default (appInfo: EggAppInfo) => {
   };
   // TODO初步解决跨域问题，后面要单独处理
   config.cors = {
-    origin: '*', // 设置允许跨域的源，可以设置为具体的域名或 '*'（表示允许所有源）
+    origin: 'http://127.0.0.1:3000', // 设置允许跨域的源，可以设置为具体的域名或 '*'（表示允许所有源）
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH', // 设置允许的 HTTP 方法
+    credentials: true, // 重要：允许 Egg.js 应用接收和发送凭证（如 cookies）
   };
   config.security = {
     csrf: {

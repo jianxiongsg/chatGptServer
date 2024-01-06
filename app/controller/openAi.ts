@@ -13,7 +13,7 @@ export default class OpenAiController extends Controller {
     }
     public async getModel() {
         const { ctx } = this;
-        const models = await ctx.service.openAiServer.getModel();
+        const models = await ctx.service.openAiServer.getModels();
         ctx.body = models;
     }
     public async createChatCompletion() {
@@ -37,7 +37,7 @@ export default class OpenAiController extends Controller {
         const messages: any[] = [];
         messages.push({ "role": 'user', "content": ctx.query.talk });
         const completion = await ctx.service.openAiServer.createChatCompletion("gpt-3.5-turbo", messages);
-        const stream = completion.toReadableStream();
+        const stream = (completion as any).toReadableStream();
         const reader = stream.getReader();
         let done = false;
         while (!done) {
@@ -73,10 +73,9 @@ export default class OpenAiController extends Controller {
         ctx.set('Access-Control-Allow-Credentials', 'true');
 
         const messages: any[] = ctx.request.body.messages;
-        console.log('..........messages', messages)
         const completion = await ctx.service.openAiServer.createChatCompletion("gpt-3.5-turbo", messages);
 
-        const reader = completion.toReadableStream().getReader();
+        const reader = (completion as any).toReadableStream().getReader();
         const stream = new PassThrough();
         ctx.body = stream;
         function read() {
@@ -131,7 +130,6 @@ export default class OpenAiController extends Controller {
             temperature: 0,
             max_tokens: 256,
         });
-        console.log('res', response)
         // let resultstring = response.data.choices[0].message.content;
         // let resultname = response.data.choices[0].message.role;
         // let result = { "role": resultname, "content": resultstring };

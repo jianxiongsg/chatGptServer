@@ -29,7 +29,6 @@ export default class HomeController extends Controller {
       temperature: 0,
       max_tokens: 256,
     });
-    console.log('res', response)
     // let resultstring = response.data.choices[0].message.content;
     // let resultname = response.data.choices[0].message.role;
     // let result = { "role": resultname, "content": resultstring };

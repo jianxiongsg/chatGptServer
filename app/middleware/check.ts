@@ -1,15 +1,14 @@
+import { ResponseError } from "app/util/response";
 import { Context } from "egg";
 
 export default () => {
     return async function check(ctx: Context, next) {
-        console.log(ctx);
-        await next();
-        return;
-        // if (ctx.session && ctx.session.loggedIn) {
-        //     await next();
-        // } else {
-        //     ctx.status = 401; // 未授权的访问
-        //     ctx.body = 'Unauthorized access, please login first.';
-        // }
+        console.log('check', ctx.session.userInfo)
+        if (ctx.session && ctx.session.userInfo) {
+            await next();
+        } else {
+            throw new ResponseError({ code: 'NEED_LOGIN', message: '未登录,请先登录吧', status: 401 })
+
+        }
     };
 }

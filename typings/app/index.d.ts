@@ -4,14 +4,10 @@
 
 import 'egg';
 export * from 'egg';
-import { DataSource } from "typeorm";
 export as namespace Egg;
-
-declare module 'egg' {
-    interface Application {
-        dataSource: DataSource;
+declare module "egg" {
+    export interface Application {
         cache: Cache;
+        dataSource: DataSource;
     }
-
 }
-

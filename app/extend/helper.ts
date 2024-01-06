@@ -6,22 +6,17 @@ const helper = {
     },
     async hashPassword(password) {
         const saltRounds = 10;
-        try {
-            const hash = await bcrypt.hash(password, saltRounds);
-            console.log('Password Hash:', hash);
-            return hash;
-        } catch (error) {
-            console.error('Error hashing password:', error);
-        }
+        const hash = await bcrypt.hash(password, saltRounds);
+        return hash;
+
     },
 
-    async checkPassword(password, hash) {
+    async checkPassword(password: string, hash: string) {
         try {
             const match = await bcrypt.compare(password, hash);
-            console.log('Do passwords match?', match);
             return match;
         } catch (error) {
-            console.error('Error comparing password and hash:', error);
+            return false
         }
     }
 
