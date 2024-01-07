@@ -29,8 +29,6 @@ export default class OpenAiController extends Controller {
         ctx.set('Connection', 'keep-alive'); // 保持服务端和前端连接
         ctx.set('X-Accel-Buffering', 'no'); // // 关闭 Nginx 的缓冲
 
-        // 设置允许跨域的域名，可以使用通配符 "*" 表示允许所有域名
-        ctx.set('Access-Control-Allow-Origin', '*');
         // 设置允许的请求方法
         ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
         // 设置允许的请求头
@@ -68,7 +66,6 @@ export default class OpenAiController extends Controller {
         ctx.set('Connection', 'keep-alive'); // 保持服务端和前端连接
         ctx.set('X-Accel-Buffering', 'no'); // // 关闭 Nginx 的缓冲
 
-        ctx.set('Access-Control-Allow-Origin', '*');
         // 设置允许的请求方法
         ctx.set('Access-Control-Allow-Methods', 'GET,HEAD,PUT,POST,DELETE,PATCH');
         // 设置允许的请求头
@@ -95,8 +92,9 @@ export default class OpenAiController extends Controller {
                     const utf8Val = ctx.helper.uint8ArrayToUtf8(value);
                     const data = JSON.parse(utf8Val);
                     const content = data?.choices?.[0].delta?.content;
-                    ctx.logger.info('value post', content);
-                    if (content) stream.write(`data:${JSON.stringify({ msg: content })}\n\n`);
+                    if (content) {
+                        stream.write(`data:${JSON.stringify({ msg: content })}\n\n`)
+                    };
                 }
                 read();
             }).catch((error) => {
@@ -114,7 +112,7 @@ export default class OpenAiController extends Controller {
         const { ctx } = this;
         ctx.logger.debug('ctx', ctx.query);
         const messages: any[] = [];
-        const apiKey = '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'
+        const apiKey = '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'
         const openai = new OpenAI({
             apiKey: apiKey,//process.env.OPENAI_API_KEY,
             // baseURL: 'https://api.openai.com/v1/chat/completions',

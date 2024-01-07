@@ -19,7 +19,6 @@ export default class UserController extends Controller {
             throw new ResponseError({ code: "CHECK_FAIL", message: '密码验证失败，请确认密码', status: 422 })
         }
         ctx.session.userInfo = { userName, password };
-        console.log('...sess', ctx.session.userInfo)
         ctx.body = { success: true, userName, id: info.id };
         ctx.status = 200;
     }

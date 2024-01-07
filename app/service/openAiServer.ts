@@ -25,7 +25,6 @@ export default class OpenAiServer extends Service {
     */
     public async getModels() {
         const list = await this._api.models.list();
-        console.log(list);
         return list;
     }
 

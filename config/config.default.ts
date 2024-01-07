@@ -10,7 +10,7 @@ export default (appInfo: EggAppInfo) => {
   // add your egg config in here
   config.middleware = ['errorHandler'];
   config.openAi = {
-    apiKey: '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',
+    apiKey: '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',
     proxy: 'http://127.0.0.1:7890',
     defaultOpenAIRequestOptions: {
       temperature: 0.8,

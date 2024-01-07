@@ -9,7 +9,7 @@ export default class HomeController extends Controller {
     const { ctx } = this;
     ctx.logger.debug('ctx', ctx.query);
     const messages: any[] = [];
-    const apiKey = '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'
+    const apiKey = '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'
     const openai = new OpenAI({
       apiKey: apiKey,//process.env.OPENAI_API_KEY,
       // baseURL: 'https://api.openai.com/v1/chat/completions',
