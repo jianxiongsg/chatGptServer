@@ -7,7 +7,7 @@ export default () => {
         if (ctx.session && ctx.session.userInfo) {
             await next();
         } else {
-            throw new ResponseError({ code: 'NEED_LOGIN', message: '未登录,请先登录吧', status: 401 })
+            throw new ResponseError({ code: 'NEED_LOGIN', message: '未登录,请先登录吧', status: 302 })
 
         }
     };

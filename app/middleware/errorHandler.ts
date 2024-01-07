@@ -11,6 +11,7 @@ export default () => {
             ctx.app.emit('error', err, ctx);
             const message = err?.message || '网络异常，请稍后再试'
             const status = err?.status || 500;
+            const data = err?.data || {}
             // 生产环境时 500 错误的详细错误内容不返回给客户端，因为可能包含敏感信息
             const code =
                 status === 500 && ctx.app.config.env === 'prod'
@@ -18,7 +19,8 @@ export default () => {
                     : err.code;
 
             // 从 error 对象上读出各个属性，设置到响应中
-            ctx.body = { code, message };
+
+            ctx.body = { code, message, data };
             ctx.status = status;
         }
     };

@@ -8,13 +8,17 @@ import { IncomingMessage } from "http"
 export default class OpenAiController extends Controller {
     public async listModels() {
         const { ctx } = this;
+        ctx.set('Content-Type', 'text/plain; charset=utf-8');
         const models = await ctx.service.openAiServer.getModels();
         ctx.body = models;
+        ctx.status = 200;
     }
     public async getModel() {
         const { ctx } = this;
+        ctx.set('Content-Type', 'text/plain; charset=utf-8');
         const models = await ctx.service.openAiServer.getModels();
         ctx.body = models;
+        ctx.status = 200;
     }
     public async createChatCompletion() {
         const { ctx } = this;

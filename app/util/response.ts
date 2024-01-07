@@ -12,12 +12,15 @@ export class ResponseError extends Error {
 
     data?: any;
     code: string;
-
+    status: number;
+    message: string;
     constructor(options: ResponseOptions) {
         super(options.message);
-        const { code = '', data } = options;
+        const { code = '', data, status, message } = options;
         this.code = code;
         this.data = data;
+        this.message = message;
+        this.status = status || 500;
         if (Error.captureStackTrace) {
             Error.captureStackTrace(this, ResponseError);
         }
