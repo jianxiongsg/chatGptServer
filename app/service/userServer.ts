@@ -1,4 +1,4 @@
-import { User } from 'app/database/entities/User';
+import { User } from '../database/entities/User';
 import { Context, Service } from 'egg';
 import * as bcrypt from 'bcryptjs';
 

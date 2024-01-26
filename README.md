@@ -31,3 +31,4 @@ $ npm start
 
 - Node.js >= 16.x
 - Typescript >= 4.x
+# 查询所有数据 SELECT * FROM public.user;

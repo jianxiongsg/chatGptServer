@@ -1,7 +1,7 @@
 import { Controller } from 'egg';
-import OpenAI from "openai";
-import { HttpsProxyAgent } from 'https-proxy-agent';
-import { ResponseError } from 'app/util/response';
+import { ResponseError } from '../util/response';
+// import OpenAI from "openai";
+// import { HttpsProxyAgent } from 'https-proxy-agent';
 // const http = require('http');
 
 

@@ -1,4 +1,4 @@
-import { ResponseError } from "app/util/response";
+import { ResponseError } from "../util/response";
 import { Context } from "egg";
 
 export default () => {

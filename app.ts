@@ -1,6 +1,6 @@
 
-import { DBClient } from 'app/database/dbClient';
-import { User } from 'app/database/entities/User';
+import { DBClient } from './app/database/dbClient';
+import { User } from './app/database/entities/User';
 import { Application, IBoot } from 'egg';
 import { DataSource } from "typeorm";
 
