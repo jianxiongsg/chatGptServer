@@ -10,11 +10,12 @@ type AutoInstanceType<T, U = T extends CanExportFunc ? T : T extends AnyFunc ? R
 import ExportLog from '../../../app/service/log';
 import ExportOpenAiServer from '../../../app/service/openAiServer';
 import ExportUserServer from '../../../app/service/userServer';
+import ExportHomeServer from '../../../app/service/homeServer';
 
 declare module 'egg' {
   interface IService {
-    log: AutoInstanceType<typeof ExportLog>;
     openAiServer: AutoInstanceType<typeof ExportOpenAiServer>;
     userServer: AutoInstanceType<typeof ExportUserServer>;
+    homeServer: AutoInstanceType<typeof ExportHomeServer>;
   }
 }

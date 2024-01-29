@@ -1,22 +1,16 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
 @Entity()
-export class User {
+export class InviteCode {
 
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    userName: string;
+    code: string;
 
     @Column()
-    password: string;
-
-    @Column()
-    phoneNumber: string;
-
-    @Column()
-    inviteCode: string;
+    use: boolean;
 
 
 }
