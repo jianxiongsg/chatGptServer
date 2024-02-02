@@ -26,7 +26,7 @@ export default class UserController extends Controller {
         const { ctx } = this;
         ctx.set('Access-Control-Allow-Credentials', 'true');
         ctx.logger.info('register', ctx.request.body);
-        const { userName, password } = ctx.request.body;
+        const { userName, password, phoneNumber, inviteCode } = ctx.request.body;
         await ctx.service.userServer.insert({ userName, password });
         ctx.body = { success: true };
         ctx.status = 200;
