@@ -33,9 +33,9 @@
     "typeorm": "0.3.17"
   },
   "devDependencies": {
+    "@eggjs/tsconfig": "1",
     "@types/mocha": "10",
     "@types/node": "18",
-    "@eggjs/tsconfig": "1",
     "egg-bin": "6",
     "egg-mock": "5",
     "eslint": "8",

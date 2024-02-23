@@ -112,7 +112,7 @@ export default class OpenAiController extends Controller {
         const { ctx } = this;
         ctx.logger.debug('ctx', ctx.query);
         const messages: any[] = [];
-        const apiKey = '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'
+        const apiKey = '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'
         const openai = new OpenAI({
             apiKey: apiKey,//process.env.OPENAI_API_KEY,
             // baseURL: 'https://api.openai.com/v1/chat/completions',

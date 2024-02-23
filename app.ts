@@ -25,8 +25,8 @@ export default class FooBoot implements IBoot {
 
     async didLoad() {
         // All files have loaded, start plugin here.
-        this.app.logger.info('启动插件...');
         const config = this.app.config.typeorm;
+        this.app.logger.info('启动插件...');
         // 创建数据源
         const dataSource = DBClient.createDataSource(config);
         try {

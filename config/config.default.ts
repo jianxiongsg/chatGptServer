@@ -10,7 +10,7 @@ export default (appInfo: EggAppInfo) => {
   // add your egg config in here
   config.middleware = ['errorHandler'];
   config.openAi = {
-    apiKey: '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',
+    apiKey: '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',
     proxy: 'http://127.0.0.1:7890',
     defaultOpenAIRequestOptions: {
       temperature: 0.8,
@@ -35,12 +35,23 @@ export default (appInfo: EggAppInfo) => {
     listen: {
       // path: '',
       port: 3000,
-      hostname: '127.0.0.1',
+      hostname: '0.0.0.0',
     }
   };
   // TODO初步解决跨域问题，后面要单独处理
   config.cors = {
-    origin: 'http://127.0.0.1:3000', // 设置允许跨域的源，可以设置为具体的域名或 '*'（表示允许所有源）
+    origin: (ctx) => {
+      const allowedOrigins = [
+        'http://127.0.0.1:3000',
+        'https://www.mygoodchatgpt.com',
+        'https://mygoodchatgpt.com',
+      ];
+      const origin = ctx.request.header.origin;
+      if (origin && allowedOrigins.includes(origin)) {
+        return origin; // 允许这个域
+      }
+      return 'http://127.0.0.1:3000'; // 返回默认域或拒绝请求
+    },//'http://127.0.0.1:3000' // 设置允许跨域的源，可以设置为具体的域名或 '*'（表示允许所有源）
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH', // 设置允许的 HTTP 方法
     credentials: true, // 重要：允许 Egg.js 应用接收和发送凭证（如 cookies）
   };

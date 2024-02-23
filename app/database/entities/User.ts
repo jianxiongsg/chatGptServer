@@ -12,11 +12,11 @@ export class User {
     @Column()
     password: string;
 
-    @Column()
-    phoneNumber: string;
+    // @Column()
+    // phoneNumber: string;
 
-    @Column()
-    inviteCode: string;
+    // @Column()
+    // inviteCode: string;
 
 
 }

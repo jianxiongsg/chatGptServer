@@ -19,6 +19,6 @@ export default (app: Application) => {
   router.get('/chat', check, controller.openAi.createChatCompletion);
   router.get('/createInviteCode', controller.home.createInviteCode);
   router.post('/chat', check, controller.openAi.createChatCompletionPost);
-  router.post('/register', check, controller.user.register);
+  router.post('/register', controller.user.register);
   router.post('/login', controller.user.login);
 };
